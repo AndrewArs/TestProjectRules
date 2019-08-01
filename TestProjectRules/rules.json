@@ -1,0 +1,68 @@
+{
+  "rules": [
+    {
+      "operator": "and",
+      "conditions": [
+        {
+          "key": "categories",
+          "condition": "inArray",
+          "val": 2
+        },
+        {
+          "key": "stage",
+          "condition": "equal",
+          "val": "planning"
+        },
+        {
+          "key": "created_at",
+          "condition": "lessThan",
+          "val": 1549459560
+        }
+      ],
+      "effects": [
+        {
+          "type": "telegram",
+          "template_id": 1,
+          "placeholders": {
+            "id": "id",
+            "name": "name"
+          }
+        },
+        {
+          "type": "smtp",
+          "template_id": 2,
+          "placeholders": {
+            "name": "name",
+            "description": "description"
+          }
+        }
+      ]
+    },
+    {
+      "operator": "or",
+      "conditions": [
+        {
+          "key": "modified_at",
+          "condition": "moreThan",
+          "val": 1549459594
+        },
+        {
+          "key": "modified_at",
+          "condition": "equals",
+          "val": 1549459594
+        }
+      ],
+      "effects": [
+        {
+          "type": "telegram",
+          "template_id": 2,
+          "placeholders": {
+            "name": "name",
+            "stage": "stage",
+            "created_at": "created_at" 
+          }
+        }
+      ] 
+    }
+  ]
+}
