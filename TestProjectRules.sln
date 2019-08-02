@@ -3,9 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProjectRules", "TestProjectRules\TestProjectRules.csproj", "{5B948FA9-C6BA-4408-B359-FFD23FDD1946}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProjectRules", "TestProjectRules\TestProjectRules.csproj", "{5B948FA9-C6BA-4408-B359-FFD23FDD1946}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{3AC78577-B990-47F8-9B3A-CEF62FA68602}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{3AC78577-B990-47F8-9B3A-CEF62FA68602}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dtos", "Dtos\Dtos.csproj", "{61BB7259-7D79-4802-A936-E877B38EA10E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainModels", "DomainModels\DomainModels.csproj", "{19899BE8-5BEB-47A0-AA69-C30847CBDC97}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{5C82A170-E106-4BFE-8C83-D37E906C2A99}"
+	ProjectSection(SolutionItems) = preProject
+		rules.json = rules.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +30,14 @@ Global
 		{3AC78577-B990-47F8-9B3A-CEF62FA68602}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3AC78577-B990-47F8-9B3A-CEF62FA68602}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3AC78577-B990-47F8-9B3A-CEF62FA68602}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61BB7259-7D79-4802-A936-E877B38EA10E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61BB7259-7D79-4802-A936-E877B38EA10E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61BB7259-7D79-4802-A936-E877B38EA10E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61BB7259-7D79-4802-A936-E877B38EA10E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19899BE8-5BEB-47A0-AA69-C30847CBDC97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19899BE8-5BEB-47A0-AA69-C30847CBDC97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19899BE8-5BEB-47A0-AA69-C30847CBDC97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19899BE8-5BEB-47A0-AA69-C30847CBDC97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
