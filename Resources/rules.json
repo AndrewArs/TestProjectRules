@@ -48,7 +48,7 @@
         },
         {
           "key": "modified_at",
-          "condition": "equals",
+          "condition": "equal",
           "val": 1549459594
         }
       ],

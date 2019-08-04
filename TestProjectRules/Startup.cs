@@ -3,8 +3,12 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Services;
+using Services.Effects;
+using Services.Options;
 using Swashbuckle.AspNetCore.Swagger;
+using Telegram.Bot;
 
 namespace TestProjectRules
 {
@@ -27,7 +31,16 @@ namespace TestProjectRules
                 c.SwaggerDoc("v1", new Info { Title = "Rules", Version = "v1" });
             });
 
+            services.AddOptions();
+            services.Configure<TelegramOptions>(Configuration.GetSection("Telegram"));
+            services.Configure<SmtpOptions>(Configuration.GetSection("Smtp"));
+
+            services.AddSingleton<TelegramEffect>();
+            services.AddSingleton<SmtpEffect>();
             services.AddSingleton<FilterService>();
+            services.AddSingleton(typeof(ExpressionBuilder<>));
+            services.AddSingleton(
+                sp => new TelegramBotClient(sp.GetService<IOptions<TelegramOptions>>().Value.ApiToken));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

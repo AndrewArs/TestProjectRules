@@ -1,19 +1,35 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.421
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29123.88
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProjectRules", "TestProjectRules\TestProjectRules.csproj", "{5B948FA9-C6BA-4408-B359-FFD23FDD1946}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{3AC78577-B990-47F8-9B3A-CEF62FA68602}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dtos", "Dtos\Dtos.csproj", "{61BB7259-7D79-4802-A936-E877B38EA10E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dtos", "Dtos\Dtos.csproj", "{61BB7259-7D79-4802-A936-E877B38EA10E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainModels", "DomainModels\DomainModels.csproj", "{19899BE8-5BEB-47A0-AA69-C30847CBDC97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainModels", "DomainModels\DomainModels.csproj", "{19899BE8-5BEB-47A0-AA69-C30847CBDC97}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{5C82A170-E106-4BFE-8C83-D37E906C2A99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelegramBot", "TelegramBot\TelegramBot.csproj", "{4125D7D7-15EF-48DC-8171-40D4CCA03C57}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{3B43A52B-90A7-4EEF-8F1C-773AD6858C3F}"
 	ProjectSection(SolutionItems) = preProject
-		rules.json = rules.json
+		Resources\rules.json = Resources\rules.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Telegram", "Telegram", "{648DE3B5-7619-4512-9664-4D4DA689CF2C}"
+	ProjectSection(SolutionItems) = preProject
+		Resources\Templates\Telegram\1.txt = Resources\Templates\Telegram\1.txt
+		Resources\Templates\Telegram\2.txt = Resources\Templates\Telegram\2.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Smtp", "Smtp", "{7B85764A-BB70-4C3E-99D2-7A92AFC26535}"
+	ProjectSection(SolutionItems) = preProject
+		Resources\Templates\Smtp\1.html = Resources\Templates\Smtp\1.html
+		Resources\Templates\Smtp\2.html = Resources\Templates\Smtp\2.html
 	EndProjectSection
 EndProject
 Global
@@ -38,9 +54,18 @@ Global
 		{19899BE8-5BEB-47A0-AA69-C30847CBDC97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19899BE8-5BEB-47A0-AA69-C30847CBDC97}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19899BE8-5BEB-47A0-AA69-C30847CBDC97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4125D7D7-15EF-48DC-8171-40D4CCA03C57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4125D7D7-15EF-48DC-8171-40D4CCA03C57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4125D7D7-15EF-48DC-8171-40D4CCA03C57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4125D7D7-15EF-48DC-8171-40D4CCA03C57}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3B43A52B-90A7-4EEF-8F1C-773AD6858C3F} = {5C82A170-E106-4BFE-8C83-D37E906C2A99}
+		{648DE3B5-7619-4512-9664-4D4DA689CF2C} = {3B43A52B-90A7-4EEF-8F1C-773AD6858C3F}
+		{7B85764A-BB70-4C3E-99D2-7A92AFC26535} = {3B43A52B-90A7-4EEF-8F1C-773AD6858C3F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C392FEBA-AAA6-45F2-8C3B-5BCBFEF7DDCE}

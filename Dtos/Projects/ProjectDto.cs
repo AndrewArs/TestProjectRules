@@ -1,16 +1,17 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Dtos.Projects
 {
     public class ProjectDto
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string Name { get; set; }
         public string Stage { get; set; }
-        public int[] Categories { get; set; }
+        public List<long> Categories { get; set; }
         [JsonProperty("created_at")]
-        public int CreatedAt { get; set; }
+        public long CreatedAt { get; set; }
         [JsonProperty("modified_at")]
-        public int ModifiedAt { get; set; }
+        public long ModifiedAt { get; set; }
     }
 }

@@ -19,7 +19,8 @@ namespace TestProjectRules.Controllers
         [HttpPost]
         public async Task<IActionResult> Filter([FromBody] ProjectsDto model)
         {
-            return Ok(await Task.FromResult(filterService.FilterProjects(model)));
+            await filterService.FilterProjects(model);
+            return Ok();
         }
     }
 }

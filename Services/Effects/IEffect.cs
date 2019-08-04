@@ -1,9 +1,12 @@
-﻿using Dtos.Projects;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using DomainModels.Models;
+using Dtos.Projects;
 
 namespace Services.Effects
 {
-    public interface IEffect
+    public interface IEffect<T>
     {
-        void Proceed(IEffect effect, ProjectDto project);
+        Task Proceed(Effect effect, ICollection<T> projects);
     }
 }

@@ -1,54 +1,66 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
-using System.Linq.Expressions;
+using System.Linq;
+using System.Threading.Tasks;
 using DomainModels.Models;
 using Dtos.Projects;
 using Newtonsoft.Json;
+using Services.Effects;
 
 namespace Services
 {
     public class FilterService
     {
-        public ProjectDto[] FilterProjects(ProjectsDto projects)
+        private readonly ExpressionBuilder<ProjectDto> _expressionBuilder;
+        private readonly TelegramEffect _telegramEffect;
+        private readonly SmtpEffect _smtpEffect;
+
+        public FilterService(ExpressionBuilder<ProjectDto> expressionBuilder, 
+            TelegramEffect telegramEffect, 
+            SmtpEffect smtpEffect)
+        {
+            _expressionBuilder = expressionBuilder;
+            _telegramEffect = telegramEffect;
+            _smtpEffect = smtpEffect;
+        }
+
+        public async Task FilterProjects(ProjectsDto projects)
         {
             var rules = LoadRules();
 
-            projects.Projects[0].Categories.
+            foreach (var rule in rules.Rules)
+            {
+                var exp = _expressionBuilder.BuildExpression(rule);
+                var func = exp.Compile();
+                var filteredProjects = projects.Projects.Where(func).ToList();
 
-            return projects.Projects;
+                foreach (var effect in rule.Effects)
+                {
+                    await ApplyEffect(effect, filteredProjects);
+                }
+            }
         }
 
-        public RulesList LoadRules()
+        private static RulesList LoadRules()
         {
-            var rulesJson = File.ReadAllText(@"~\..\..\rules.json");
+            var rulesJson = File.ReadAllText(@"~\..\..\Resources\rules.json");
             var rules = JsonConvert.DeserializeObject<RulesList>(rulesJson);
 
             return rules;
         }
 
-        public void CreateFilter(Rule rule)
+        private async Task ApplyEffect(Effect effect, ICollection<ProjectDto> projects)
         {
-            foreach (var condition in rule.Conditions)
+            switch (effect.Type)
             {
-                var left = Expression.Parameter(typeof(object), condition.Key);
-                var right = Expression.Constant(condition.Val);
-
-                switch (condition.Condition)
-                {
-                    case "equal":
-                        Expression.Equal(left, right);
-                        break;
-                    case "inArray":
-                        Expression.Call(typeof(Array), "Contains", new Type[] { },left, right);
-                        break;
-                    case "moreThan":
-                        Expression.GreaterThan(left, right);
-                        break;
-                    case "lessThan":
-                        Expression.LessThan(left, right);
-                        break;
-                    default: throw new ArgumentException($"Wrong condition: {condition.Condition}");
-                }
+                case Constants.TelegramEffect:
+                    await _telegramEffect.Proceed(effect, projects);
+                    break;
+                case Constants.SmtpEffect:
+                    await _smtpEffect.Proceed(effect, projects);
+                    break;
+                default: throw new ArgumentException($"Wrong effect type: {effect.Type}");
             }
         }
     }

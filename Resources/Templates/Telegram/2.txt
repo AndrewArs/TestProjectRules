@@ -1,0 +1,6 @@
+Second template
+Name: %name%
+Stage: %stage%
+Description: %description%
+Created at: %created_at%
+Modified at: %modified_at%
