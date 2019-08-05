@@ -7,7 +7,7 @@ namespace Services.Extensions
 {
     public static class ProjectExtensions
     {
-        private static readonly string[] PlaceholderstranslateToDate = {"created_at", "modified_at"};
+        private static readonly string[] PlaceholdersToDate = {"created_at", "modified_at"};
 
         public static Dictionary<string, object> GetPlaceholdersWithValues(this ProjectDto project, Dictionary<string, string> placeholders)
         {
@@ -18,7 +18,7 @@ namespace Services.Extensions
                 var property = placeholder.Value.SnakeCaseToPascalCase();
                 var value = project.GetPropValue(property);
 
-                if (PlaceholderstranslateToDate.Contains(placeholder.Value))
+                if (PlaceholdersToDate.Contains(placeholder.Value))
                 {
                     value = DateTimeOffset.FromUnixTimeSeconds((long)value)
                         .DateTime.ToLocalTime();
