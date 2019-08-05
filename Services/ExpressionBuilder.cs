@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using DomainModels.Models;
-using Services.Helpers;
+using Services.Extensions;
 
 namespace Services
 {
@@ -45,7 +45,7 @@ namespace Services
 
         private static Expression GetExpression(Expression param, ConditionFilter condition)
         {
-            var propName = CaseHelper.SnakeCaseToPascalCase(condition.Key);
+            var propName = condition.Key.SnakeCaseToPascalCase();
             var left = Expression.Property(param, propName);
             var right = Expression.Constant(condition.Val);
 

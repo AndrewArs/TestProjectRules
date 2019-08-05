@@ -7,6 +7,7 @@ namespace Dtos.Projects
     {
         public long Id { get; set; }
         public string Name { get; set; }
+        public string Description { get; set; }
         public string Stage { get; set; }
         public List<long> Categories { get; set; }
         [JsonProperty("created_at")]

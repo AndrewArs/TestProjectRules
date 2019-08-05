@@ -35,6 +35,7 @@ namespace TestProjectRules
             services.Configure<TelegramOptions>(Configuration.GetSection("Telegram"));
             services.Configure<SmtpOptions>(Configuration.GetSection("Smtp"));
 
+            services.AddSingleton<EmailService>();
             services.AddSingleton<TelegramEffect>();
             services.AddSingleton<SmtpEffect>();
             services.AddSingleton<FilterService>();

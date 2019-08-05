@@ -5,7 +5,6 @@ using DomainModels.Models;
 using Dtos.Projects;
 using Microsoft.Extensions.Options;
 using Services.Extensions;
-using Services.Helpers;
 using Services.Options;
 using Telegram.Bot;
 using Telegram.Bot.Types;
@@ -33,26 +32,12 @@ namespace Services.Effects
 
             foreach (var project in projects)
             {
-                var placeholdersWithValues = GetPlaceholdersWithValues(project, effect.Placeholders);
+                var placeholdersWithValues = project.GetPlaceholdersWithValues(effect.Placeholders);
                 result += template.FillTemplate(placeholdersWithValues);
                 result += Environment.NewLine;
             }
 
             await _botClient.SendTextMessageAsync(chatId, result);
-        }
-
-        private Dictionary<string, object> GetPlaceholdersWithValues(ProjectDto project, Dictionary<string, string> placeholders)
-        {
-            var result = new Dictionary<string, object>();
-
-            foreach (var placeholder in placeholders)
-            {
-                var property = CaseHelper.SnakeCaseToPascalCase(placeholder.Value);
-                var value = project.GetPropValue(property);
-                result.Add(placeholder.Key, value);
-            }
-
-            return result;
         }
 
         private static string LoadTemplate(int templateId)
