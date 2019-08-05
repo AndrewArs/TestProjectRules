@@ -28,6 +28,7 @@ namespace Services
         public async Task FilterProjects(ProjectsDto projects)
         {
             var rules = LoadRules();
+            var effects = new List<Task>();
 
             foreach (var rule in rules.Rules)
             {
@@ -37,9 +38,11 @@ namespace Services
 
                 foreach (var effect in rule.Effects)
                 {
-                    await ApplyEffect(effect, filteredProjects);
+                    effects.Add(ApplyEffect(effect, filteredProjects));
                 }
             }
+
+            await Task.WhenAll(effects);
         }
 
         private static RulesList LoadRules()

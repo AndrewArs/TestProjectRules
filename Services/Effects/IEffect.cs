@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using DomainModels.Models;
-using Dtos.Projects;
 
 namespace Services.Effects
 {

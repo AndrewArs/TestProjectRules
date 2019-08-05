@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using DomainModels.Models;
@@ -54,7 +53,9 @@ namespace Services
                 case Constants.EqualsCondition:
                     return Expression.Equal(left, right);
                 case Constants.InArrayCondition:
-                    var method = typeof(List<long>).GetMethod("Contains");
+                    var method = left.Type.GetMethod("Contains") ??
+                                 throw new InvalidOperationException(
+                                     $"Wrong condition : {condition.Key} {condition.Condition} {condition.Val}");
                     return Expression.Call(left, method, right);
                 case Constants.MoreThanCondition:
                     return Expression.GreaterThan(left, right);
