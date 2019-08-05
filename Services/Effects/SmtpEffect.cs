@@ -38,7 +38,7 @@ namespace Services.Effects
 
         private static string LoadTemplate(int templateId)
         {
-            return File.ReadAllText($"~\\..\\..\\Resources\\Templates\\Smtp\\{templateId}.html");
+            return File.ReadAllText($"Resources/Templates/Smtp/{templateId}.html");
         }
     }
 }

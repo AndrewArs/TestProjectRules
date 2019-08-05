@@ -9,17 +9,17 @@ namespace TestProjectRules.Controllers
     [ApiController]
     public class ProjectsController : ControllerBase
     {
-        private readonly FilterService filterService;
+        private readonly FilterService _filterService;
 
         public ProjectsController(FilterService filterService)
         {
-            this.filterService = filterService;
+            _filterService = filterService;
         }
 
         [HttpPost]
         public async Task<IActionResult> Filter([FromBody] ProjectsDto model)
         {
-            await filterService.FilterProjects(model);
+            await _filterService.FilterProjects(model);
             return Ok();
         }
     }

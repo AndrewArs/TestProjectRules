@@ -47,7 +47,7 @@ namespace Services
 
         private static RulesList LoadRules()
         {
-            var rulesJson = File.ReadAllText(@"~\..\..\Resources\rules.json");
+            var rulesJson = File.ReadAllText(@"Resources/rules.json");
             var rules = JsonConvert.DeserializeObject<RulesList>(rulesJson);
 
             return rules;

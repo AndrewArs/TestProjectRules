@@ -42,7 +42,7 @@ namespace Services.Effects
 
         private static string LoadTemplate(int templateId)
         {
-            return File.ReadAllText($"~\\..\\..\\Resources\\Templates\\Telegram\\{templateId}.txt");
+            return File.ReadAllText($"Resources/Templates/Telegram/{templateId}.txt");
         }
     }
 }
