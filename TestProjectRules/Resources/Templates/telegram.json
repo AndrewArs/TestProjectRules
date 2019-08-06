@@ -1,0 +1,10 @@
+[
+  {
+    "id": 1,
+    "body": "New project with\nId: %id%\n Name: %name%"
+  },
+  {
+    "id": 2,
+    "body": "Second template\nName: %name%\nStage: %stage%\nDescription: %description%\nCreated at: %created_at%\nModified at: %modified_at%"
+  }
+]

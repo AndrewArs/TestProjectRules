@@ -9,6 +9,7 @@ using Services.Effects;
 using Services.Options;
 using Swashbuckle.AspNetCore.Swagger;
 using Telegram.Bot;
+using TestProjectRules.Filters;
 
 namespace TestProjectRules
 {
@@ -24,7 +25,8 @@ namespace TestProjectRules
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(config => config.Filters.Add<ExceptionFilter>())
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddSwaggerGen(c =>
             {
@@ -34,7 +36,7 @@ namespace TestProjectRules
             services.AddOptions();
             services.Configure<TelegramOptions>(Configuration.GetSection("Telegram"));
             services.Configure<SmtpOptions>(Configuration.GetSection("Smtp"));
-
+            
             services.AddSingleton<EmailService>();
             services.AddSingleton<TelegramEffect>();
             services.AddSingleton<SmtpEffect>();

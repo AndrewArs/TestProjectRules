@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "subject": "Project name: %name%",
+    "body": "<p>Project id: <b>%id%</b></p> <p>Project name: <b>%name%</b></p>"
+  },
+  {
+    "id": 2,
+    "subject": "Project name: %name%",
+    "body": "<p>Description: %description%</p> <p style=\"color: green\">Created at: %created_at%</p> <p style=\"color: gray\">Modified at: %modified_at%</p>"
+  }
+] 

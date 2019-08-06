@@ -1,3 +1,0 @@
-New project with 
-Id: %id% 
-Name: %name%

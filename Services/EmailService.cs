@@ -19,8 +19,10 @@ namespace Services
             _smtpOptions = options.Value;
         }
 
-        public async Task SendHtmlEmail(string recipient, string body)
+        public async Task SendHtmlEmail(string recipient, string subject, string body)
         {
+            _logger.LogInformation($"Sending message to recipient {recipient}.\nsubject: {subject}\nmessage: {body}");
+
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress(_smtpOptions.EmailFrom));
             message.To.Add(new MailboxAddress(recipient));
@@ -28,6 +30,7 @@ namespace Services
             var builder = new BodyBuilder();
             builder.HtmlBody = body;
 
+            message.Subject = subject;
             message.Body = builder.ToMessageBody();
 
             try

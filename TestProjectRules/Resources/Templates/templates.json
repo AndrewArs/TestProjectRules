@@ -1,0 +1,24 @@
+{
+  "telegram": [
+    {
+      "id": 1,
+      "body": "New project with\nId: %id%\n Name: %name%"
+    },
+    {
+      "id": 2,
+      "body": "Second template\nName: %name%\nStage: %stage%\nDescription: %description%\nCreated at: %created_at%\nModified at: %modified_at%" 
+    }
+  ],
+  "smtp": [
+    {
+      "id": 1,
+      "subject": "Project name: %name%",
+      "body": "<p>Project id: <b>%id%</b></p> <p>Project name: <b>%name%</b></p>"
+    },
+    {
+      "id": 2,
+      "subject": "Project name: %name%",
+      "body": "<p>Description: %description%</p> <p style=\"color: green\">Created at: %created_at%</p> <p style=\"color: gray\">Modified at: %modified_at%</p>" 
+    }
+  ] 
+}

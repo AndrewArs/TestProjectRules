@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using DomainModels.Models;
+using DomainModels.Models.Templates;
 using Dtos.Projects;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using Services.Extensions;
 using Services.Options;
 using Telegram.Bot;
@@ -15,11 +19,15 @@ namespace Services.Effects
     public class TelegramEffect : IEffect<ProjectDto>
     {
         private readonly TelegramBotClient _botClient;
+        private readonly ILogger<TelegramEffect> _logger;
         private readonly TelegramOptions _telegramOptions;
 
-        public TelegramEffect(IOptions<TelegramOptions> options, TelegramBotClient botClient)
+        public TelegramEffect(IOptions<TelegramOptions> options, 
+            TelegramBotClient botClient, 
+            ILogger<TelegramEffect> logger)
         {
             _botClient = botClient;
+            _logger = logger;
             _telegramOptions = options.Value;
         }
 
@@ -33,16 +41,20 @@ namespace Services.Effects
             foreach (var project in projects)
             {
                 var placeholdersWithValues = project.GetPlaceholdersWithValues(effect.Placeholders);
-                result += template.FillTemplate(placeholdersWithValues);
+                result += template.Body.FillTemplate(placeholdersWithValues);
+                result += Environment.NewLine;
                 result += Environment.NewLine;
             }
 
+            _logger.LogInformation($"Sending message to chat {chatId}. {result}");
             await _botClient.SendTextMessageAsync(chatId, result);
         }
 
-        private static string LoadTemplate(int templateId)
+        private static TelegramTemplate LoadTemplate(int templateId)
         {
-            return File.ReadAllText($"Resources/Templates/Telegram/{templateId}.txt");
+            var templates = File.ReadAllText("Resources/Templates/telegram.json");
+
+            return JsonConvert.DeserializeObject<IEnumerable<TelegramTemplate>>(templates).FirstOrDefault(t => t.Id == templateId);
         }
     }
 }

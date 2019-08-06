@@ -36,9 +36,12 @@ namespace Services
                 var func = exp.Compile();
                 var filteredProjects = projects.Projects.Where(func).ToList();
 
-                foreach (var effect in rule.Effects)
+                if (filteredProjects.Any())
                 {
-                    effects.Add(ApplyEffect(effect, filteredProjects));
+                    foreach (var effect in rule.Effects)
+                    {
+                        effects.Add(ApplyEffect(effect, filteredProjects));
+                    }
                 }
             }
 
